@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Results</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">Results</h1>
+    <p>You scored {{ score }}%</p>
+    <ul class="list-group">
+        {% for result in results %}
+        <li class="list-group-item {% if result['correct'] %}list-group-item-success{% else %}list-group-item-danger{% endif %}">
+            <p><strong>Question:</strong> {{ result['question'] }}</p>
+            <p><strong>Your Answer:</strong> {{ result['user_answer'] }}</p>
+            <p><strong>Correct Answer:</strong> {{ result['correct_answer'] }}</p>
+            <p><strong>Explanation:</strong> {{ result['explanation'] }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('index') }}" class="btn btn-primary mt-3">Back to Home</a>
+</div>
+</body>
+</html>

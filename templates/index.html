@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Generator</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">Quiz Generator</h1>
+    <form action="{{ url_for('generate_quiz') }}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="input_type">Input Type:</label>
+            <select class="form-control" id="input_type" name="input_type" required>
+                <option value="PDF">PDF</option>
+                <option value="Text">Text</option>
+                <option value="Blog URL">Blog URL</option>
+                <option value="Video URL">Video URL</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="pdf_file">PDF File:</label>
+            <input type="file" class="form-control-file" id="pdf_file" name="pdf_file">
+        </div>
+        <div class="form-group">
+            <label for="input_text">Text Input:</label>
+            <textarea class="form-control" id="input_text" name="input_text"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="url">URL:</label>
+            <input type="url" class="form-control" id="url" name="url">
+        </div>
+        <div class="form-group">
+            <label for="schooling_level">Schooling Level:</label>
+            <input type="text" class="form-control" id="schooling_level" name="schooling_level" required>
+        </div>
+        <div class="form-group">
+            <label for="num_questions">Number of Questions:</label>
+            <input type="number" class="form-control" id="num_questions" name="num_questions" required>
+        </div>
+        <div class="form-group">
+            <label for="level">Difficulty Level:</label>
+            <input type="text" class="form-control" id="level" name="level" required>
+        </div>
+        <div class="form-group">
+            <label for="language">Language:</label>
+            <input type="text" class="form-control" id="language" name="language" required>
+        </div>
+        <div class="form-group">
+            <label for="question_types">Question Types:</label>
+            <select multiple class="form-control" id="question_types" name="question_types">
+                <option value="single_select">Single Select</option>
+                <option value="true_false">True/False</option>
+                <option value="numeric">Numeric</option>
+                <option value="theory">Theory</option>
+                <option value="multiple_select">Multiple Select</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Generate Quiz</button>
+    </form>
+</div>
+<script>
+    document.getElementById('input_type').addEventListener('change', function () {
+        let pdfFileInput = document.getElementById('pdf_file');
+        let textInput = document.getElementById('input_text');
+        let urlInput = document.getElementById('url');
+        pdfFileInput.style.display = 'none';
+        textInput.style.display = 'none';
+        urlInput.style.display = 'none';
+        if (this.value === 'PDF') {
+            pdfFileInput.style.display = 'block';
+        } else if (this.value === 'Text') {
+            textInput.style.display = 'block';
+        } else if (this.value === 'Blog URL' || this.value === 'Video URL') {
+            urlInput.style.display = 'block';
+        }
+    });
+</script>
+</body>
+</html>
